@@ -23,6 +23,36 @@
 - Promises, async/await
   - pt-br: Requisições AJAX com JavaScript
   - inglês: Javascript Promises
+    - Detalhamento ASYNC/AWAIT:
+      - O `async` e o `await` são utilizados para trabalhar com código assíncrono, ou seja, aquele em que algumas operações podem ser iniciadas e, enquanto aguardam a conclusão o programa continua executando outras tarefas. Resumidamente eles servem para não travar a execução do codigo enquanto aguarda o resultado dessas operações.
+        ```
+            // Exemplo de codigo síncrono
+            console.log('Inicio'); // Exibe o primeiro console
+            alert('Meio'); // Trava o programa para exibir o alert
+            console.log('Fim'); // Apos o alert ser fechado exibe o ultimo console
+        ``` 
+        Nesse exemplo, o código fica bloqueado esperando o usuário fechar o alert, o que impede que a linha console.log('Fim') seja executada até isso acontecer.
+
+        ```
+            // Mesmo exemplo só que utilizando um código assíncrono 
+            console.log("Início"); // Exibe o primeiro console
+            setTimeout(() => {
+                console.log("Fim");
+            }, 2000); // Vai esperar 2 segundos antes de exibir "Fim", mas o código continua executando enquanto isso
+
+            console.log("Meio"); // Vai exibir o console após o inicio
+        ```
+        Aqui, o código não fica bloqueado. Ele começa a execução da função setTimeout e continua com console.log("Meio") enquanto aguarda a conclusão do setTimeout. O "Fim" só é exibido após 2 segundos, mas o programa não foi "travado" enquanto isso.
+
+    - Detalhamento Promisses:
+      - Podemos comparar a promisse como uma promessa de algo que vai acontecer no futuro. São utilizadas no JS para representar uma ação ASSINCRONA, ou seja, como explicado anteriormente é algo que não acontece imediatamente.
+      - A promisse possui 3 estados principais:
+        - Pending(Em espera): Quando você cria uma Promisse, ela começa no estado de pending. Significa que o que você pediu ainda está sendo feito.
+        - Fulfilled (Cumprida): Quando a operação assincrona é concluida. No caso você recebe o que foi prometido.
+        - Rejected (Reijeitada): Se algo der errado e a operação nao puder ser concluida, a Promisse é rejeitada.
+      - Promisse é uma classe padrão no Javascript, a qual outras classes utilizam suas propriedades como é o caso do FETCH que é uma função nativa do JS que retorna uma Promisse(class).
+      - [Exemplo de utilização da Classe Promisse](/test/Promisse/promisse.js)
+
 - Manipulação DOM
   - inglês: The Document Object Model
 - Event Propagation/Event Bubbling
