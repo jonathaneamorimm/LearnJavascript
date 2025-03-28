@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form onsubmit="return false">
+        <input type="text" id="name" /><br>
+        <input type="text" id="idade" /><br>
+        <button id="enviar">Enviar</button>
+    </form>
+
+    <script>
+        const submit = document.querySelector('#enviar')
+        let name = document.querySelector('#name');
+        let idade = document.querySelector('#idade');
+
+        async function enviarDados (){
+            try {
+                const USER_URL = 'http://localhost:3000/users';
+                let dados = {
+                    name : name.value,
+                    idade : idade.value
+                }
+                const config = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dados)
+                }
+                const response = await fetch(USER_URL, config);
+                if(!response.ok) {
+                    throw new Error(`Erro: ${response.statusText}`);
+                }
+                const data = await response.json();
+
+                console.log('Usuario Criado: ', data);
+            } catch(error) {
+                console.log('Erro ao criar usuario: ', error);
+            }
+        }   
+
+        submit.addEventListener('click', () => {
+            enviarDados();
+        })
+    </script>
+</body>
+</html>
