@@ -20,6 +20,31 @@
   - pt-br: API REST com JSON Server, Requisições
   - inglês: Create a fake REST API with JSON-Server
     - [Video sobre api Rest com JSON Server](https://www.fabricadecodigo.com/json-server/)
+    - [Documentação Oficial Json-server](https://www.npmjs.com/package/json-server)
+    - Detalhamento FETCH:
+      - O fetch é um método do nativo do Javascript que permite realizar requisições HTTP sem a necessidade de bibliotecas ou frameworks externos. O método fetch é um método assíncrono que retorna uma promisse. Existem duas formas de trabalhar com o fetch:
+        - A primeira forma é utilizando o fetch().then o qual é uma maneira simplificada de realizar a operação assíncrona.
+          ```
+          fetch('http://simulation.request.com/users', config)
+          .then(res => res.json())
+          .then(response => console.log(response))
+          .catch(err => console.log(err));
+          ```
+        - A outra forma de utilizar é utilizando o ASYNC/AWAIT. Essa forma é ama forma mais limpa e legível de visualizar uma requisição utilizando o fetch.
+          ```
+          async function getUser() {
+            try {
+              const response = await fetch('http://simulation.request.com/users', config);
+              // inserir exceções para tratamento de erro
+              const dados = await response.json();
+              console.log(dados);
+            } catch (err) {
+              console.log(err);
+            }
+          }
+          ``` 
+        - Documentação sobre as respostas do fetch: [Fetch responses](https://developer.mozilla.org/pt-BR/docs/Web/API/Response)
+        - [Exemplo de utilização do FETCH](/test/JsonServer/src/js/services/api.js);
 - Promises, async/await
   - pt-br: Requisições AJAX com JavaScript
   - inglês: Javascript Promises
@@ -43,6 +68,7 @@
             console.log("Meio"); // Vai exibir o console após o inicio
         ```
         Aqui, o código não fica bloqueado. Ele começa a execução da função setTimeout e continua com console.log("Meio") enquanto aguarda a conclusão do setTimeout. O "Fim" só é exibido após 2 segundos, mas o programa não foi "travado" enquanto isso.
+        - [Exemplo de utilização do ASYNC|AWAIT](/test/JsonServer/src/js/services/api.js);
 
     - Detalhamento Promisses:
       - Podemos comparar a promisse como uma promessa de algo que vai acontecer no futuro. São utilizadas no JS para representar uma ação ASSINCRONA, ou seja, como explicado anteriormente é algo que não acontece imediatamente.
@@ -52,7 +78,6 @@
         - Rejected (Reijeitada): Se algo der errado e a operação nao puder ser concluida, a Promisse é rejeitada.
       - Promisse é uma classe padrão no Javascript, a qual outras classes utilizam suas propriedades como é o caso do FETCH que é uma função nativa do JS que retorna uma Promisse(class).
       - [Exemplo de utilização da Classe Promisse](/test/Promisse/promisse.js)
-
 - Manipulação DOM
   - inglês: The Document Object Model
 - Event Propagation/Event Bubbling

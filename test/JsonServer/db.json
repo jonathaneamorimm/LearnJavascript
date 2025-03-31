@@ -1,72 +1,19 @@
 {
   "users": [
     {
-      "id": "8ec7",
-      "name": "1",
+      "name": "z",
+      "idade": "z",
+      "id": "8048"
+    },
+    {
+      "id": "f484",
+      "name": "d",
+      "idade": "d"
+    },
+    {
+      "id": "bc72",
+      "name": "a",
       "idade": "a"
-    },
-    {
-      "id": "dfb3",
-      "name": "a",
-      "idade": "1"
-    },
-    {
-      "id": "6996",
-      "name": "a",
-      "idade": "1"
-    },
-    {
-      "id": "95fe",
-      "name": "b",
-      "idade": "1"
-    },
-    {
-      "id": "e393",
-      "name": "",
-      "idade": ""
-    },
-    {
-      "id": "494e",
-      "name": "a",
-      "idade": "23"
-    },
-    {
-      "id": "e094",
-      "name": "adadadad",
-      "idade": "1321212"
-    },
-    {
-      "id": "1bbb",
-      "name": "23123421a",
-      "idade": "afgsafasfas"
-    },
-    {
-      "id": "7d39",
-      "name": "adadadad",
-      "idade": "123413451"
-    },
-    {
-      "id": "e17f",
-      "name": "adadadad",
-      "idade": "2352"
-    },
-    {
-      "id": "f318",
-      "name": "aaaa",
-      "idade": "2323"
-    },
-    {
-      "id": "6fb1",
-      "name": "a",
-      "idade": "12134"
-    },
-    {
-      "id": "3ea1",
-      "name": "adfasf",
-      "idade": "1234515"
     }
-  ],
-  "posts": [],
-  "comments": [],
-  "profile": {}
+  ]
 }

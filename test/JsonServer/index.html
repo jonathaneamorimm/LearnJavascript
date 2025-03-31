@@ -4,49 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/test/jsonserver/assets/styles/globals.css">
 </head>
 <body>
-    
-    <form onsubmit="return false">
-        <input type="text" id="name" /><br>
-        <input type="text" id="idade" /><br>
-        <button id="enviar">Enviar</button>
-    </form>
 
-    <script>
-        const submit = document.querySelector('#enviar')
-        let name = document.querySelector('#name');
-        let idade = document.querySelector('#idade');
+    <section>
+        <table>
+            <caption>Table Users</caption>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>User AGE</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="userdata">
 
-        async function enviarDados (){
-            try {
-                const USER_URL = 'http://localhost:3000/users';
-                let dados = {
-                    name : name.value,
-                    idade : idade.value
-                }
-                const config = {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(dados)
-                }
-                const response = await fetch(USER_URL, config);
-                if(!response.ok) {
-                    throw new Error(`Erro: ${response.statusText}`);
-                }
-                const data = await response.json();
+            </tbody>
+        </table>
+    </section>
 
-                console.log('Usuario Criado: ', data);
-            } catch(error) {
-                console.log('Erro ao criar usuario: ', error);
-            }
-        }   
+    <section>
+        <h2>Cadastrar usuario</h2>
+        <form onsubmit="return false">
+            <input type="text" id="newUserName" /><br>
+            <input type="text" id="newUserAge" /><br>
+            <button id="enviar">Enviar</button>
+        </form> 
+    </section>
 
-        submit.addEventListener('click', () => {
-            enviarDados();
-        })
-    </script>
+    <div id="modalEdit" class="modal"> 
+        <div class="modal-content">
+            <div class="header-modal">
+                <h3>Edit User</h3>
+                <span id="closeModal">&times;</span>
+            </div>
+            <div class="formEditContent">
+                <form onsubmit="return false" id="formEdit">
+                    <label for="editUserName">Username</label>
+                    <input type="text" id="editUserName" /><br>
+                    <label for="editUserAge">User Age</label>
+                    <input type="text" id="editUserAge" /><br>
+                    <button id="submitEdit">Editar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/test/jsonserver/assets/js/main.js"></script>
 </body>
 </html>
