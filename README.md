@@ -44,7 +44,7 @@
           }
           ``` 
         - Documentação sobre as respostas do fetch: [Fetch responses](https://developer.mozilla.org/pt-BR/docs/Web/API/Response)
-        - [Exemplo de utilização do FETCH](/test/JsonServer/src/js/services/api.js);
+        - [Exemplo de utilização do FETCH](/test/jsonserver/assets/js/services/api.js);
 - Promises, async/await
   - pt-br: Requisições AJAX com JavaScript
   - inglês: Javascript Promises
@@ -68,7 +68,7 @@
             console.log("Meio"); // Vai exibir o console após o inicio
         ```
         Aqui, o código não fica bloqueado. Ele começa a execução da função setTimeout e continua com console.log("Meio") enquanto aguarda a conclusão do setTimeout. O "Fim" só é exibido após 2 segundos, mas o programa não foi "travado" enquanto isso.
-        - [Exemplo de utilização do ASYNC|AWAIT](/test/JsonServer/src/js/services/api.js);
+        - [Exemplo de utilização do ASYNC|AWAIT](/test/jsonserver/assets/js/services/api.js);
 
     - Detalhamento Promisses:
       - Podemos comparar a promisse como uma promessa de algo que vai acontecer no futuro. São utilizadas no JS para representar uma ação ASSINCRONA, ou seja, como explicado anteriormente é algo que não acontece imediatamente.
@@ -80,11 +80,101 @@
       - [Exemplo de utilização da Classe Promisse](/test/Promisse/promisse.js)
 - Manipulação DOM
   - inglês: The Document Object Model
+    - Detalhamento DOM:
+      - Resumidamente o DOM é o modelo de objeto de um arquivo HTML que podem ser acessados via JS para trabalhar de forma mais dinâmica com uma página. Com ele é possível realizar diversas interações como alterar os estilos de elementos, adicionar ou remover elementos, ocultar ou exibir elementos, alterar valores de elementos e muito mais. Os objetos HTML possuem propriedades e métodos que podem ser usados para manipulação, como innerHTML, style, addEventListener, entre outros.;
+        ```
+        const element = document.querySelector('#elementSelector'); // Atribuir a uma variável a referência a um elemento HTML
+        element.innerHTML += 'Hello World'; // Alterar o conteudo do elemento selecionado na página HTML
+        element.style.color = 'red'; // Alterando a estilização de um elemento
+        ``` 
+        Também é possivel manipular os eventos que ocorrem uma página HTML como clique de mouse, movimento de mouse, teclas pressionadas e muito mais.
+        ```
+          const button = document.querySelector('.seletor');
+          button.onclick = () => {
+            console.log('Pressionado');
+          }
+        ```
 - Event Propagation/Event Bubbling
   - inglês: Event Bubbling (MDN)
-- GULP
+    - Detalhamento Event bubbling:
+      - O bubbling é um comportamento padrão de propagação de eventos em JavaScript. Quando um evento é disparado em um elemento filho, ele se propaga para os elementos pais. Ou seja, o evento começa no elemento mais específico e sobe na árvore DOM até o document. Isso permite adicionar um único ouvinte de evento em um elemento pai, como uma lista ou um contêiner, para capturar eventos em vários filhos.
+      Exemplo
+          ```
+          // Crio uma lista que possui 3 filhos
+          <body>
+            <ul id="list">
+              <li> Item 1 </li>
+              <li class="item2"> Item 2 </li>
+              <li> Item 3 </li>
+            </ul>
+          </body>
+
+          <script>
+            const list = document.querySelector('#list');
+            list.addEventListener('click', (event) => {
+              // O 'event.target' nos permite acessar o elemento específico que foi clicado
+              if (event.target.matches('li.item2')) {
+                console.log('O item clicado foi o item 2');
+              }
+              // No exemplo, o evento é inserido no elemento pai (ul),
+              // e ao clicar no filho <li class="item2">, a propagação faz com que o evento seja capturado no elemento pai.
+            });
+          </script>
+          ``` 
+        - Existe um comportamento que é o oposto do bubblign, onde o evento começa na raiz e desce até o elemento específico, chamado capturing. Segue um exemplo prático:
+          ```
+          list.addEventListener('click', (event) => {
+            console.log('Evento capturado no UL');
+          }, true);  // 'true' ativa o capturing
+          ``` 
 ## Conteudo avançado
 - Node.js: o que é, como funciona
+  - Detalhamento Node.js
+    - O Node.js é um ambiente de execução do código Javascript do lado servidor (server side). Com ele é possivel criar aplicações no formato standalone (autossuficiente) em uma maquina servidora sem precisar de navegador.
+    - O arquivo pricipal é o `package.json` onde fica armazenado as principais informações sobre o projeto que incluem, nome do projeto, versão, arquivo entryPoint, author e dependencias. 
 - Entendendo o npm e seus principais comandos (npm init, npm install, npm run);
+  - O NPM e o YARN são gerenciadores de pacote do Node, ou seja `repositorios` de codigo voltados para pacotes do Node.
+  - Por padrão o NPM já vem instalado junto com o Node mas se for necessário basta instalar o YARN a partir do NPM.
+  - Quando é utilizado o comando `npm install <packageName>` acontece um fenomeno parecido com o git pull, onde o node puxa as informações da biblioteca e aloca em uma pasta chamada `node_modules` e insere a informação do pacote no package.json.
+  - Quando um pacote é instalado, dependendo do pacote, é instalado com ele outros pacotes que são necessários para utilizar aquele pacote especifico. Esses outros pacotes também vão para a pasta `node_modules` e são listados no arquivo package-lock.json.
+  - [Documentação NPM](https://docs.npmjs.com/)
+    - Alguns comandos básicos do NPM
+      ```
+        | npm init -> Inicia um projeto node (Pede algumas informações e cria o arquivo package.json). Caso utilize a flag `-y` cria o package com as informações padrão
+        | npm install -> Instala uma dependencia para a utilização e caso não haja cria a pasta node_modules.
+        | npm run -> É usado para executar scrips definidos no arquivo package.json key ("scripts"), e o mesmo possui alguns subcomandos:
+          | npm run start -> Vai rodar o comando que estiver no valor "start".
+          | npm run test -> Vai rodar os testes usando uma lib pré-definida.
+          | npm run build -> É utilizado como build da aplicação
+          | npm run dev -> Vai iniciar o servidor que reiniciará automaticamente o servidor sempre que ocorrer mudanças no codigo.
+      ``` 
 - Entendendo automatizadores de tarefas e uso de Gulp.
-- O que é Babel.js e para que serve
+  - Detalhamento Automatizadores de tarefas e GULP.
+    - Automatizadores de tarefas são ferramentas que automatizam processos repetitivos no desenvolvimento de software no geral. Exemplos de uso:
+      - Minificação de arquivos - GULP e GRUNT
+      - Compilação de arquivos - GULP E GRUNT
+      - Otimização de imagens 
+      - Execução de testes.
+    - GULP: O Gulp é um automatizador de tarefas baseado em streams (fluxo de dados) do Node, utilizado para automatizar processos de minificação de arquivos compilação de arquivos SCSS para CSS, concatenação de scripts e otimização de imagens
+      - As configurações de otimização se encontrarão no arquivo gulpfile.js
+        ```
+        // Exemplo básico de utilização do GULP
+        npm install --global gulp-cli // Esse comando vai permitir que o gulp possa ser excutado no terminal, mas ele ainda precisa ser instalado como dependencia no projeto
+        npm install --save-dev gulp 
+        /* Esse comando instala as dependencias do gulp no projeto, detalhe que o --save-dev indica que essa dependencia só vai ser utilizada em ambientes de desenvolvimento e não são necessários em ambiente de produção. Por esse motivo a dependencia será listada no `devDependencies` do package.json ao inves do `dependencies`. Isso é importante para evitar o excesso de pacotes em produção, deixando apenas o necessário. */
+
+        Criar o arquivo `gulpfile.js` na raiz do projeto
+
+        const gulp = require('gulp');
+        gulp.task('<nameFunction>', (done) => {
+          console.log('Hello World');
+          done(); // Indica que a tarefa foi concluida pois não há return
+        })
+
+        No terminal execute o comando `gulp <namFunction>` que a tarefa será executada.
+        ``` 
+- O que é Babel.js e para que serve:
+  - Detalhamento Babel.js
+    - Antes de entender o que é e que faz o Babel precisamos entender a diferença entre compiladores e transpiladores:
+      - Compilador: é um recurso que possibilita traduzir uma linguagem de médio ou alto nível para uma linguagem de nivel mais baixo.
+      - Transpilador: Ferra
