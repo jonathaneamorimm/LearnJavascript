@@ -44,7 +44,7 @@
           }
           ``` 
         - Documentação sobre as respostas do fetch: [Fetch responses](https://developer.mozilla.org/pt-BR/docs/Web/API/Response)
-        - [Exemplo de utilização do FETCH](/test/jsonserver/assets/js/services/api.js);
+        - [Exemplo de utilização do FETCH](/tests/jsonserver/assets/js/services/api.js);
 - Promises, async/await
   - pt-br: Requisições AJAX com JavaScript
   - inglês: Javascript Promises
@@ -68,7 +68,7 @@
             console.log("Meio"); // Vai exibir o console após o inicio
         ```
         Aqui, o código não fica bloqueado. Ele começa a execução da função setTimeout e continua com console.log("Meio") enquanto aguarda a conclusão do setTimeout. O "Fim" só é exibido após 2 segundos, mas o programa não foi "travado" enquanto isso.
-        - [Exemplo de utilização do ASYNC|AWAIT](/test/jsonserver/assets/js/services/api.js);
+        - [Exemplo de utilização do ASYNC|AWAIT](/tests/jsonserver/assets/js/services/api.js);
 
     - Detalhamento Promisses:
       - Podemos comparar a promisse como uma promessa de algo que vai acontecer no futuro. São utilizadas no JS para representar uma ação ASSINCRONA, ou seja, como explicado anteriormente é algo que não acontece imediatamente.
@@ -77,7 +77,7 @@
         - Fulfilled (Cumprida): Quando a operação assincrona é concluida. No caso você recebe o que foi prometido.
         - Rejected (Reijeitada): Se algo der errado e a operação nao puder ser concluida, a Promisse é rejeitada.
       - Promisse é uma classe padrão no Javascript, a qual outras classes utilizam suas propriedades como é o caso do FETCH que é uma função nativa do JS que retorna uma Promisse(class).
-      - [Exemplo de utilização da Classe Promisse](/test/Promisse/promisse.js)
+      - [Exemplo de utilização da Classe Promisse](/tests/promisse/promisse.js)
 - Manipulação DOM
   - inglês: The Document Object Model
     - Detalhamento DOM:
@@ -173,8 +173,54 @@
 
         No terminal execute o comando `gulp <namFunction>` que a tarefa será executada.
         ``` 
+        [Uso prático do GULP](/tests/node_gulp/)
 - O que é Babel.js e para que serve:
   - Detalhamento Babel.js
     - Antes de entender o que é e que faz o Babel precisamos entender a diferença entre compiladores e transpiladores:
       - Compilador: é um recurso que possibilita traduzir uma linguagem de médio ou alto nível para uma linguagem de nivel mais baixo.
-      - Transpilador: Ferra
+      - Transpilador: Ferramenta que lê um codigo em uma linguagem de programação e produz um código equivalente com o mesmo nivel de abstração
+    - Agora que já sabemos, vamos entender o que é o Babel. Ele é um automatizador de tarefa, no caso uma ferramenta para pré-processar Javscirpt que converte um código escrito nas versões mais atuais do Javascript para versões mais antigas do Javascript. Essa mudança torna o código compativel para navegadores que possuem versões mais antigas do JS. Entre as funcionalidades do Babel é possivel encontrar:
+      - Sintaxe de transformação
+        - Funcionalidade principal, que transforma código escrito em linguagem Atual como o ES6
+      - Recursos Polyfill
+        - Preenche as lacunas de compatibilidade com navegadores, ou seja, caso o recurso nao exista na versão antiga ele é adicionado.
+      - Transformações de codigo fonte
+        - Quando um código original é modificado para atingir um determinado objetivo.
+    - Uma desvantagem do Babel, diferente do GULP, faz com que o código acabe ficando mais extenso.
+    - Uso Prático do Babel:
+      ```
+        // Iniciando as configurações do BabelJs
+        npm install --save-dev @babel/core @babel/cli @babel/preset-env core-js
+        /*
+        --save-dev: Como já explicado na sessão de gulp, insere o modulo apenas em ambiente de desenvolvimento.
+        @babel/core: Adiciona o núcleo do Babel.
+        @babel/cli: Permite executar o babel a partir da linha de comando.
+        @@babel/preset-env: Premite usar as funcionalidades do js e transpila para versoes mais antigas
+        core-js: Fornece polyfills necessários para recursos mais recentes do Js.
+        */
+
+        O arquivo de configuração do babel deve ser nomeado de `babel.config.js` ou `.babelrc`
+        // Estrutura do arquivo babel.config.js
+        module.exports = {
+        presets: [
+          [
+            '@babel/preset-env',
+            {
+              targets: '> 0.25%, not dead', // Especifica para quais navegadores o código será transpilado.
+              useBuiltIns: 'usage', // Adiciona polyfills de acordo com o que o código usa.
+              corejs: 3, // Define a versão do core-js.
+            },
+          ],
+        ],
+      };
+
+      // Agora no arquivo package.json basta inserir as configurações de build
+      "scripts": {
+        "build": "babel <srcFolder> --out-dir <distFolder>"
+      }
+
+      Para buildar os arquivos basta executar o comando
+      `npm run build`
+      ``` 
+    - [O que é babel?](https://coodesh.com/blog/dicionario/o-que-e-babel/)
+    - [Uso prático do babelJS](/tests/node_babel/)
